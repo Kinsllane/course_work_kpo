@@ -85,3 +85,13 @@ class Comment(Base):
 
     ticket = relationship("Ticket", back_populates="comments")
     user = relationship("User", back_populates="comments")
+
+class TicketHistory(Base):
+    __tablename__ = "ticket_history"
+    id = Column(Integer, primary_key=True)
+    ticket_id = Column(Integer, ForeignKey("tickets.id"))
+    changed_by = Column(Integer, ForeignKey("users.id"))
+    field = Column(String(50))  # Поле (status, priority и т.д.)
+    old_value = Column(String(100))
+    new_value = Column(String(100))
+    changed_at = Column(DateTime(timezone=True), server_default=func.now())
