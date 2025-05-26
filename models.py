@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime, Enum
-from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from database import Base
 import enum
 
@@ -86,8 +86,10 @@ class Comment(Base):
     ticket = relationship("Ticket", back_populates="comments")
     user = relationship("User", back_populates="comments")
 
+
 class TicketHistory(Base):
     __tablename__ = "ticket_history"
+
     id = Column(Integer, primary_key=True)
     ticket_id = Column(Integer, ForeignKey("tickets.id"))
     changed_by = Column(Integer, ForeignKey("users.id"))
