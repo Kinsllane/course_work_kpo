@@ -138,110 +138,138 @@ class MainWindow(QMainWindow):
 
     def set_style(self):
         self.setStyleSheet("""
+            /* Базовые настройки */
             QWidget {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background-color: #2e3436;  /* Темный фон */
-                color: #dcdfe1;  /* Светлый серый текст */
+                font-family: 'Segoe UI', system-ui;
+                background-color: #1a1d21;
+                color: #e0e0e0;
+                font-size: 14px;
             }
 
+            /* Заголовки */
             QLabel {
-                font-size: 14px;
-                color: #dcdfe1;  /* Светлый серый текст для меток */
+                font-size: 15px;
+                font-weight: 500;
+                color: #ffffff;
+                padding: 5px 0;
             }
 
-            QLineEdit, QTextEdit, QComboBox {
-                background-color: #3c4346;  /* Темный фон для полей ввода */
-                border: 1px solid #666666;  /* Темно-серая граница */
-                border-radius: 5px;
-                padding: 8px;
-                font-size: 14px;
-                color: #dcdfe1;  /* Светлый текст */
-            }
-
-            QLineEdit:focus, QTextEdit:focus {
-                border-color: #3faffa;  /* Голубой цвет при фокусе */
-            }
-
+            /* Кнопки */
             QPushButton {
-                background-color: #444c56;  /* Темно-серый цвет кнопки */
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-size: 16px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+                background-color: #2d3239;
+                border: 1px solid #3d434b;
+                border-radius: 6px;
+                padding: 8px 20px;
+                min-width: 100px;
+                transition: all 0.3s;
             }
 
             QPushButton:hover {
-                background-color: #556273;  /* Светлее при наведении */
+                background-color: #373e47;
+                border-color: #4a515b;
+                transform: translateY(-1px);
             }
 
-            QPushButton:disabled {
-                background-color: #7d7f7f;  /* Серый для неактивных кнопок */
-                cursor: not-allowed;
+            QPushButton:pressed {
+                background-color: #24292e;
+                transform: translateY(0);
             }
 
-            QTableWidget {
-                background-color: #333b3f;  /* Темный фон для таблицы */
-                border: 1px solid #555555;  /* Темная граница */
-                border-radius: 5px;
-                font-size: 14px;
-                color: #dcdfe1;  /* Светлый текст в таблице */
-            }
-
-            QTableWidgetItem {
+            /* Поля ввода */
+            QLineEdit, QTextEdit, QComboBox, QDateEdit {
+                background-color: #24292e;
+                border: 1px solid #3d434b;
+                border-radius: 6px;
                 padding: 8px;
-                border-bottom: 1px solid #444444;  /* Тонкая темная линия между строками */
+                selection-background-color: #3a6fb0;
+            }
+
+            QLineEdit:focus, QTextEdit:focus {
+                border: 1px solid #3a6fb0;
+                background-color: #2d3239;
+            }
+
+            /* Таблица */
+            QTableWidget {
+                background-color: #1f2329;
+                border: 1px solid #2d3239;
+                border-radius: 6px;
+                gridline-color: #2d3239;
+                alternate-background-color: #24292e;
+            }
+
+            QHeaderView::section {
+                background-color: #2d3239;
+                color: #ffffff;
+                border: none;
+                padding: 8px;
+            }
+
+            QTableWidget::item {
+                padding: 8px;
+                border-bottom: 1px solid #2d3239;
             }
 
             QTableWidget::item:selected {
-                background-color: #556273;  /* Светло-серый для выделенной строки */
+                background-color: #3a6fb0;
+                color: #ffffff;
             }
 
-            QStatusBar {
-                background-color: #2c3338;  /* Темный фон для статус бара */
-                font-size: 14px;
-                color: #dcdfe1;  /* Светлый текст */
-            }
-
-            QToolBar {
-                background-color: #444c56;  /* Темная панель инструментов */
-                border-radius: 5px;
-                font-size: 16px;
-            }
-
-            QToolBar QToolButton {
-                background-color: #444c56;
-                border-radius: 5px;
-                color: white;
-            }
-
-            QToolBar QToolButton:hover {
-                background-color: #556273;
-            }
-
+            /* Вкладки */
             QTabWidget::pane {
                 border: none;
             }
 
-            QTabWidget::tab-bar {
-                alignment: center;
-            }
-
             QTabBar::tab {
-                background-color: #444c56;  /* Темная вкладка */
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
+                background-color: #2d3239;
+                color: #a0a0a0;
+                padding: 10px 20px;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+                margin-right: 2px;
+                font-weight: 500;
             }
 
             QTabBar::tab:hover {
-                background-color: #556273;  /* Светлее при наведении */
+                background-color: #373e47;
+                color: #ffffff;
             }
 
             QTabBar::tab:selected {
-                background-color: #556273;  /* Выделенная вкладка */
+                background-color: #1f2329;
+                color: #ffffff;
+                border-bottom: 2px solid #3a6fb0;
+            }
+
+            /* Статус бар */
+            QStatusBar {
+                background-color: #2d3239;
+                color: #a0a0a0;
+                border-top: 1px solid #3d434b;
+            }
+
+            /* Иконки */
+            QPushButton[class="icon"] {
+                padding: 8px;
+                border-radius: 6px;
+                min-width: 32px;
+            }
+
+            /* Акцентные элементы */
+            .primary-btn {
+                background-color: #3a6fb0;
+                border-color: #4a81c0;
+                color: #ffffff;
+            }
+
+            .primary-btn:hover {
+                background-color: #4a81c0;
+            }
+
+            .danger-btn {
+                background-color: #b03a3a;
+                border-color: #c04a4a;
+                color: #ffffff;
             }
         """)
 

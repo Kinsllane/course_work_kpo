@@ -27,7 +27,6 @@ class User(Base):
     full_name = Column(String(100))
     role = Column(Enum(UserRole))
 
-    # Явно указываем foreign keys для отношений
     created_tickets = relationship(
         "Ticket",
         foreign_keys="[Ticket.client_id]",
@@ -39,8 +38,6 @@ class User(Base):
         foreign_keys="[Ticket.technician_id]",
         back_populates="technician"
     )
-
-    comments = relationship("Comment", back_populates="user")
 
 
 class Ticket(Base):
@@ -69,22 +66,6 @@ class Ticket(Base):
         foreign_keys=[technician_id],
         back_populates="assigned_tickets"
     )
-
-    comments = relationship("Comment", back_populates="ticket")
-
-
-class Comment(Base):
-    __tablename__ = "comments"
-
-    id = Column(Integer, primary_key=True)
-    text = Column(Text)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    ticket_id = Column(Integer, ForeignKey("tickets.id"))
-    user_id = Column(Integer, ForeignKey("users.id"))
-
-    ticket = relationship("Ticket", back_populates="comments")
-    user = relationship("User", back_populates="comments")
 
 
 class TicketHistory(Base):

@@ -18,7 +18,6 @@ def create_sample_data():
 
     try:
         # Очищаем таблицы в правильном порядке
-        session.query(Comment).delete()
         session.query(Ticket).delete()
         session.query(User).delete()
         session.commit()
@@ -74,22 +73,6 @@ def create_sample_data():
         )
 
         session.add_all([ticket1, ticket2])
-        session.commit()
-
-        # Добавляем комментарии
-        comment1 = Comment(
-            text="Пробовали перезагружать принтер?",
-            ticket_id=ticket1.id,
-            user_id=technician.id
-        )
-
-        comment2 = Comment(
-            text="Да, перезагружали - не помогает",
-            ticket_id=ticket1.id,
-            user_id=client1.id
-        )
-
-        session.add_all([comment1, comment2])
         session.commit()
 
         print("Тестовые данные успешно добавлены!")
